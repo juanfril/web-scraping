@@ -99,7 +99,7 @@ curl http://127.0.0.1:3000/scrape
 * Ensure logs are maintained for monitoring.
 
 ## Usage
-* Access the API at `http://<ec2-instance-public-ip>:5000/scrape` to trigger the scraper.
+* Access the API at `http://ec2-54-93-173-53.eu-central-1.compute.amazonaws.com` to trigger the scraper.
 * Check the `src/infra/data/` directory for the `combined_scraped_data.json` file with the extracted data.
 
 ## Documentation
@@ -108,6 +108,37 @@ curl http://127.0.0.1:3000/scrape
 
 ## Demo
 * A recorded demo showcasing the working API, web scraper, CI/CD pipeline, and scheduler setup will be provided separately.
+### API
+* Once the service is available, you can make a request to the path /scrape.
+![alt text](images/image-1.png)
+* This will initiate the scraping process and return a 200 status with the message 'Scraping started'.
 
-## Presentation
-* Be prepared to present your solution, discuss challenges faced, solutions implemented, and any assumptions made during the next interview.
+
+### Scraper
+1. Initiate Scraping:
+* When a request is made to `/scrape`, the service initiates the scraping process.
+* A `200 OK` response is sent back immediately with the message "Scraping started".
+
+2. Set Up Pagination:
+* The scraper sets the page size to 50 results per page to minimize the number of requests and handle data more efficiently.
+
+3. Extract Data:
+* For each page, the scraper extracts registrant details (registrant name, status, class, and practice location).
+
+4. Incremental Scraping:
+* The scraper processes the data page by page, following the "Next" page button until all pages are scraped.
+
+5. Timestamped File Creation:
+* Each time the scraper runs, it generates a unique JSON file with a timestamp in the filename (e.g., scraped_data_YYYYMMDDHHMMSS.json).
+
+* Data Appending:
+Data is continuously appended to this unique file during the scraping process to ensure no data is lost and duplication is minimized.
+Final Combined File:
+
+* After the scraping process completes, the individual JSON files can be combined into a single combined_scraped_data.json file, ensuring all scraped data is consolidated in one place.
+![alt text](images/image-3.png)
+
+![alt text](images/image-2.png)
+
+### CI/CD pipeline
+The CI/CD pipeline is in progress. Currently, it's failing because the secrets are not being read correctly.
