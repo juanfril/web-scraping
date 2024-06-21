@@ -85,7 +85,7 @@ flask run
 ```
 2. Trigger the scraper via API:
 ```bash
-curl http://127.0.0.1:5000/scrape
+curl http://127.0.0.1:3000/scrape
 ```
 
 ### Deployment
