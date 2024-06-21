@@ -65,7 +65,7 @@ web-scraping/
 ### Installation
 1. Clone the repository:
 ```bash
-git clone https://github.com/juanfril/web-scraping-node.git
+git clone https://github.com/juanfril/web-scraping.git
 cd web-scraping
 ```
 
